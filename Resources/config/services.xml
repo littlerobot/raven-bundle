@@ -21,7 +21,6 @@
                  public="false">
             <argument/>
             <argument type="service" id="raven.service"/>
-            <argument type="service" id="service_container"/>
             <argument type="service" id="logger" on-invalid="null"/>
             <tag name="monolog.logger" channel="raven"/>
         </service>

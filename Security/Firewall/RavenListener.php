@@ -19,7 +19,6 @@ use Misd\RavenBundle\Security\Authentication\Token\RavenUserToken;
 use Misd\RavenBundle\Service\RavenServiceInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
-use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Event\GetResponseEvent;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\Security\Core\Authentication\AuthenticationManagerInterface;
@@ -108,6 +107,10 @@ class RavenListener implements ListenerInterface
 
             if (null !== $this->logger) {
                 $this->logger->debug('Found WLS response', array('CRSid' => $token->getUsername()));
+            }
+
+            if (rawurldecode($token->getAttribute('url')) !== $request->getUri()) {
+                throw new RavenException('URL mismatch');
             }
 
             switch ($token->getAttribute('status')) {

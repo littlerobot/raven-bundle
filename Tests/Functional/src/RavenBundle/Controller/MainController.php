@@ -11,15 +11,16 @@
 
 namespace Misd\RavenBundle\Tests\Functional\src\RavenBundle\Controller;
 
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\RedirectResponse;
-use Symfony\Component\DependencyInjection\ContainerAware;
+use Symfony\Component\HttpFoundation\Request;
 
 /**
  * MainController.
  *
  * @author Chris Wilkinson <chris.wilkinson@admin.cam.ac.uk>
  */
-class MainController extends ContainerAware
+class MainController extends Controller
 {
     /**
      * Authenticate action.
@@ -30,11 +31,13 @@ class MainController extends ContainerAware
      * - 'problem' defines the expected problem
      * - 'expired' defines whether the response has already expired
      *
+     * @param Request $request
+     *
      * @return RedirectResponse
      */
-    public function authenticateAction()
+    public function authenticateAction(Request $request)
     {
-        $query = $this->container->get('request')->query;
+        $query = $request->query;
 
         $redirect = $this->createRedirect(
             $query->get('ver'),

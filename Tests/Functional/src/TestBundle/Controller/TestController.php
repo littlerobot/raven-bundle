@@ -11,7 +11,7 @@
 
 namespace Misd\RavenBundle\Tests\Functional\src\TestBundle\Controller;
 
-use Symfony\Component\DependencyInjection\ContainerAware;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
@@ -19,7 +19,7 @@ use Symfony\Component\HttpFoundation\Response;
  *
  * @author Chris Wilkinson <chris.wilkinson@admin.cam.ac.uk>
  */
-class TestController extends ContainerAware
+class TestController extends Controller
 {
     public function unsecuredAction()
     {
