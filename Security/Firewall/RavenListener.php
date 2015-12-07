@@ -21,9 +21,10 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Event\GetResponseEvent;
-use Symfony\Component\HttpKernel\Log\LoggerInterface;
+use Psr\Log\LoggerInterface;
 use Symfony\Component\Security\Core\Authentication\AuthenticationManagerInterface;
-use Symfony\Component\Security\Core\SecurityContextInterface;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
+use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Http\Event\InteractiveLoginEvent;
 use Symfony\Component\Security\Http\Firewall\ListenerInterface;
@@ -35,13 +36,6 @@ use Symfony\Component\Security\Http\Firewall\ListenerInterface;
  */
 class RavenListener implements ListenerInterface
 {
-    /**
-     * Security context.
-     *
-     * @var SecurityContextInterface
-     */
-    protected $securityContext;
-
     /**
      * Authentication manager.
      *
@@ -69,29 +63,33 @@ class RavenListener implements ListenerInterface
      * @var LoggerInterface|null
      */
     protected $logger;
+    /**
+     * @var TokenInterface
+     */
+    private $tokens;
 
     /**
      * Constructor.
      *
-     * @param SecurityContextInterface       $securityContext       Security context.
+     * @param TokenStorageInterface          $tokens
      * @param AuthenticationManagerInterface $authenticationManager Authentication manager.
      * @param EventDispatcherInterface       $dispatcher            Event dispatcher.
      * @param RavenServiceInterface          $raven                 Raven service.
      * @param LoggerInterface|null           $logger                Logger
      */
     public function __construct(
-        SecurityContextInterface $securityContext,
+        TokenStorageInterface $tokens,
         AuthenticationManagerInterface $authenticationManager,
         EventDispatcherInterface $dispatcher,
         RavenServiceInterface $raven,
         LoggerInterface $logger = null
     )
     {
-        $this->securityContext = $securityContext;
         $this->authenticationManager = $authenticationManager;
         $this->dispatcher = $dispatcher;
         $this->raven = $raven;
         $this->logger = $logger;
+        $this->tokens = $tokens;
     }
 
     /**
@@ -149,11 +147,11 @@ class RavenListener implements ListenerInterface
 
             $token = $this->authenticationManager->authenticate($token);
 
-            $this->securityContext->setToken($token);
+            $this->tokens->setToken($token);
             $this->dispatcher->dispatch(RavenEvents::LOGIN, new InteractiveLoginEvent($request, $token));
         } elseif (
-            $this->securityContext->getToken() != null &&
-            $this->securityContext->getToken()->getUser() instanceof UserInterface
+            $this->tokens->getToken() != null &&
+            $this->tokens->getToken()->getUser() instanceof UserInterface
         ) {
             // The user is already logged in
         } else {

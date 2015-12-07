@@ -30,7 +30,7 @@ class TestController extends ContainerAware
     {
         return new Response(sprintf(
             'This is secured. You are %s.',
-            $this->container->get('security.context')->getToken()->getUsername()
+            $this->container->get('security.token_storage')->getToken()->getUsername()
         ));
     }
 }

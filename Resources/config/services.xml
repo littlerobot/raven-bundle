@@ -27,7 +27,7 @@
         </service>
 
         <service id="raven.security.listener" class="%raven.security.listener.class%" public="false">
-            <argument type="service" id="security.context"/>
+            <argument type="service" id="security.token_storage"/>
             <argument type="service" id="security.authentication.manager"/>
             <argument type="service" id="event_dispatcher"/>
             <argument type="service" id="raven.service"/>
