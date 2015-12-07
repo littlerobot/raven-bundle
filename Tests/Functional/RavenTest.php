@@ -11,6 +11,8 @@
 
 namespace Misd\RavenBundle\Tests\Functional;
 
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
+
 /**
  * RavenTest.
  *
@@ -28,9 +30,9 @@ class RavenTest extends WebTestCase
         return parent::createClient(array('test_case' => self::$testCase, 'root_config' => self::$config));
     }
 
-    protected function route($name, $parameters = array(), $absolute = false)
+    protected function route($name, $parameters = array(), $referenceType = UrlGeneratorInterface::ABSOLUTE_PATH)
     {
-        return self::$kernel->getContainer()->get('router')->generate($name, $parameters, $absolute);
+        return self::$kernel->getContainer()->get('router')->generate($name, $parameters, $referenceType);
     }
 
     public function test200Response()
@@ -45,11 +47,11 @@ class RavenTest extends WebTestCase
         $crawler = $client->followRedirect();
         $crawler = $client->followRedirect();
         $this->assertContains('This is secured. You are', $crawler->text());
-        $this->assertEquals($this->route('secured', array(), true), $client->getRequest()->getUri());
+        $this->assertEquals($this->route('secured', array(), UrlGeneratorInterface::ABSOLUTE_URL), $client->getRequest()->getUri());
 
         $crawler = $client->request('GET', $this->route('secured'));
         $this->assertContains('This is secured. You are', $crawler->text());
-        $this->assertEquals($this->route('secured', array(), true), $client->getRequest()->getUri());
+        $this->assertEquals($this->route('secured', array(), UrlGeneratorInterface::ABSOLUTE_URL), $client->getRequest()->getUri());
 
         $client->restart();
 
@@ -59,7 +61,7 @@ class RavenTest extends WebTestCase
         $crawler = $client->followRedirect();
         $this->assertContains('This is secured. You are', $crawler->text());
         $this->assertEquals(
-            $this->route('secured', array('param1' => 'foo', 'param2' => 'bar'), true),
+            $this->route('secured', array('param1' => 'foo', 'param2' => 'bar'), UrlGeneratorInterface::ABSOLUTE_URL),
             $client->getRequest()->getUri()
         );
 
@@ -71,7 +73,8 @@ class RavenTest extends WebTestCase
         $crawler = $client->followRedirect();
         $this->assertContains('This is secured. You are', $crawler->text());
         $this->assertEquals(
-            $this->route('secured', array('param[1]' => 'foo', 'param[2]' => 'bar!'), true),
+            $this->route('secured', array('param[1]' => 'foo', 'param[2]' => 'bar!'),
+                         UrlGeneratorInterface::ABSOLUTE_URL),
             $client->getRequest()->getUri()
         );
 
@@ -86,7 +89,8 @@ class RavenTest extends WebTestCase
         $crawler = $client->followRedirect();
         $this->assertContains('This is secured. You are', $crawler->text());
         $this->assertEquals(
-            $this->route('secured', array('param%5B1%5D' => 'foo', 'param%5B2%5D' => 'bar%21'), true),
+            $this->route('secured', array('param%5B1%5D' => 'foo', 'param%5B2%5D' => 'bar%21'),
+                         UrlGeneratorInterface::ABSOLUTE_URL),
             $client->getRequest()->getUri()
         );
     }
