@@ -31,7 +31,7 @@ class MisdRavenExtension extends Extension
         $configuration = new Configuration();
         $config = $this->processConfiguration($configuration, $configs);
 
-        $loader = new XmlFileLoader($container, new FileLocator(array(__DIR__ . '/../Resources/config/')));
+        $loader = new XmlFileLoader($container, new FileLocator(array(__DIR__.'/../Resources/config/')));
         $loader->load('services.xml');
 
         $container->setParameter('raven.description', isset($config['description']) ? $config['description'] : null);

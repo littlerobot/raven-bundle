@@ -29,12 +29,12 @@ class RavenFactory implements SecurityFactoryInterface
      */
     public function create(ContainerBuilder $container, $id, $config, $userProvider, $defaultEntryPoint)
     {
-        $providerId = 'security.authentication.provider.raven.' . $id;
+        $providerId = 'security.authentication.provider.raven.'.$id;
         $container
             ->setDefinition($providerId, new DefinitionDecorator('raven.security.authentication.provider'))
             ->replaceArgument(0, new Reference($userProvider));
 
-        $listenerId = 'security.authentication.listener.raven.' . $id;
+        $listenerId = 'security.authentication.listener.raven.'.$id;
         $container->setDefinition($listenerId, new DefinitionDecorator('raven.security.listener'));
 
         return array($providerId, $listenerId, $defaultEntryPoint);

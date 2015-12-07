@@ -82,8 +82,7 @@ class RavenListener implements ListenerInterface
         EventDispatcherInterface $dispatcher,
         RavenServiceInterface $raven,
         LoggerInterface $logger = null
-    )
-    {
+    ) {
         $this->authenticationManager = $authenticationManager;
         $this->dispatcher = $dispatcher;
         $this->raven = $raven;
@@ -176,14 +175,14 @@ class RavenListener implements ListenerInterface
 
         $parameters = array();
         foreach ($redirectEvent->params as $key => $val) {
-            $parameters[] = $key . '=' . utf8_encode(urlencode($val));
+            $parameters[] = $key.'='.utf8_encode(urlencode($val));
         }
-        $parameters = '?' . implode('&', $parameters);
+        $parameters = '?'.implode('&', $parameters);
 
         if (null !== $this->logger) {
             $this->logger->debug('Redirecting to Raven');
         }
 
-        $responseEvent->setResponse(new RedirectResponse($this->raven->getUrl() . $parameters, 303));
+        $responseEvent->setResponse(new RedirectResponse($this->raven->getUrl().$parameters, 303));
     }
 }

@@ -103,7 +103,7 @@ class RavenTest extends WebTestCase
         $client = $this->createClient();
 
         $client->request('GET', $this->route('secured'));
-        $client->request('GET', $client->getResponse()->getTargetUrl() . '&status=410');
+        $client->request('GET', $client->getResponse()->getTargetUrl().'&status=410');
         $client->followRedirect();
         $client->followRedirect();
     }
@@ -116,7 +116,7 @@ class RavenTest extends WebTestCase
         $client = $this->createClient();
 
         $client->request('GET', $this->route('secured'));
-        $client->request('GET', $client->getResponse()->getTargetUrl() . '&status=510');
+        $client->request('GET', $client->getResponse()->getTargetUrl().'&status=510');
         $client->followRedirect();
         $client->followRedirect();
     }
@@ -129,7 +129,7 @@ class RavenTest extends WebTestCase
         $client = $this->createClient();
 
         $client->request('GET', $this->route('secured'));
-        $client->request('GET', $client->getResponse()->getTargetUrl() . '&status=520');
+        $client->request('GET', $client->getResponse()->getTargetUrl().'&status=520');
         $client->followRedirect();
         $client->followRedirect();
     }
@@ -142,7 +142,7 @@ class RavenTest extends WebTestCase
         $client = $this->createClient();
 
         $client->request('GET', $this->route('secured'));
-        $client->request('GET', $client->getResponse()->getTargetUrl() . '&status=530');
+        $client->request('GET', $client->getResponse()->getTargetUrl().'&status=530');
         $client->followRedirect();
         $client->followRedirect();
     }
@@ -155,7 +155,7 @@ class RavenTest extends WebTestCase
         $client = $this->createClient();
 
         $client->request('GET', $this->route('secured'));
-        $client->request('GET', $client->getResponse()->getTargetUrl() . '&status=540');
+        $client->request('GET', $client->getResponse()->getTargetUrl().'&status=540');
         $client->followRedirect();
         $client->followRedirect();
     }
@@ -168,7 +168,7 @@ class RavenTest extends WebTestCase
         $client = $this->createClient();
 
         $client->request('GET', $this->route('secured'));
-        $client->request('GET', $client->getResponse()->getTargetUrl() . '&status=560');
+        $client->request('GET', $client->getResponse()->getTargetUrl().'&status=560');
         $client->followRedirect();
         $client->followRedirect();
     }
@@ -181,7 +181,7 @@ class RavenTest extends WebTestCase
         $client = $this->createClient();
 
         $client->request('GET', $this->route('secured'));
-        $client->request('GET', $client->getResponse()->getTargetUrl() . '&status=570');
+        $client->request('GET', $client->getResponse()->getTargetUrl().'&status=570');
         $client->followRedirect();
         $client->followRedirect();
     }
@@ -194,7 +194,7 @@ class RavenTest extends WebTestCase
         $client = $this->createClient();
 
         $client->request('GET', $this->route('secured'));
-        $client->request('GET', $client->getResponse()->getTargetUrl() . '&status=999');
+        $client->request('GET', $client->getResponse()->getTargetUrl().'&status=999');
         $client->followRedirect();
         $client->followRedirect();
     }
@@ -207,7 +207,7 @@ class RavenTest extends WebTestCase
         $client = $this->createClient();
 
         $client->request('GET', '/secured');
-        $client->request('GET', $client->getResponse()->getTargetUrl() . '&expired=true');
+        $client->request('GET', $client->getResponse()->getTargetUrl().'&expired=true');
         $client->followRedirect();
         $client->followRedirect();
     }
@@ -220,7 +220,7 @@ class RavenTest extends WebTestCase
         $client = $this->createClient();
 
         $client->request('GET', $this->route('secured'));
-        $client->request('GET', $client->getResponse()->getTargetUrl() . '&problem=invalid');
+        $client->request('GET', $client->getResponse()->getTargetUrl().'&problem=invalid');
         $client->followRedirect();
         $client->followRedirect();
     }
@@ -233,7 +233,7 @@ class RavenTest extends WebTestCase
         $client = $this->createClient();
 
         $client->request('GET', $this->route('secured'));
-        $client->request('GET', $client->getResponse()->getTargetUrl() . '&problem=incomplete');
+        $client->request('GET', $client->getResponse()->getTargetUrl().'&problem=incomplete');
         $client->followRedirect();
         $client->followRedirect();
     }
@@ -246,7 +246,7 @@ class RavenTest extends WebTestCase
         $client = $this->createClient();
 
         $client->request('GET', $this->route('secured'));
-        $client->request('GET', $client->getResponse()->getTargetUrl() . '&problem=kid');
+        $client->request('GET', $client->getResponse()->getTargetUrl().'&problem=kid');
         $client->followRedirect();
         $client->followRedirect();
     }
@@ -259,7 +259,7 @@ class RavenTest extends WebTestCase
         $client = $this->createClient();
 
         $client->request('GET', $this->route('secured'));
-        $client->request('GET', $client->getResponse()->getTargetUrl() . '&problem=url');
+        $client->request('GET', $client->getResponse()->getTargetUrl().'&problem=url');
         $client->followRedirect();
         $client->followRedirect();
     }
@@ -272,7 +272,7 @@ class RavenTest extends WebTestCase
         $client = $this->createClient();
 
         $client->request('GET', $this->route('secured'));
-        $client->request('GET', $client->getResponse()->getTargetUrl() . '&problem=auth');
+        $client->request('GET', $client->getResponse()->getTargetUrl().'&problem=auth');
         $client->followRedirect();
         $client->followRedirect();
     }
@@ -285,7 +285,7 @@ class RavenTest extends WebTestCase
         $client = $this->createClient();
 
         $client->request('GET', $this->route('secured'));
-        $client->request('GET', $client->getResponse()->getTargetUrl() . '&problem=sso');
+        $client->request('GET', $client->getResponse()->getTargetUrl().'&problem=sso');
         $client->followRedirect();
         $client->followRedirect();
     }

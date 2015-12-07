@@ -70,7 +70,7 @@ class RavenUser implements UserInterface
      */
     public function getPassword()
     {
-        return null;
+        return;
     }
 
     /**
@@ -78,7 +78,7 @@ class RavenUser implements UserInterface
      */
     public function getSalt()
     {
-        return null;
+        return;
     }
 
     /**

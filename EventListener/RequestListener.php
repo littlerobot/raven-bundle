@@ -37,9 +37,9 @@ class RequestListener
 
         $wlsResponse = $request->query->get('WLS-Response');
         $request->query->remove('WLS-Response');
-        $uri = $request->getSchemeAndHttpHost() . $request->getBaseUrl() . $request->getPathInfo();
+        $uri = $request->getSchemeAndHttpHost().$request->getBaseUrl().$request->getPathInfo();
         if ($request->query->count() > 0) {
-            $uri .= '?' . http_build_query($request->query->all());
+            $uri .= '?'.http_build_query($request->query->all());
         }
         $request->getSession()->set('wls_response', $wlsResponse);
         $event->setResponse(new RedirectResponse($uri));

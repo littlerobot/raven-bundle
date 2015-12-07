@@ -18,6 +18,7 @@ namespace Misd\RavenBundle\Service;
  * elsewhere might compromise your application.
  *
  * @author Chris Wilkinson <chris.wilkinson@admin.cam.ac.uk>
+ *
  * @link http://raven.cam.ac.uk/project/test-demo/
  */
 class TestRavenService implements RavenServiceInterface
