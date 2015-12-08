@@ -54,13 +54,13 @@ class RavenUserToken extends AbstractToken
     {
         $parts = explode('!', $wlsResponse);
 
-        if (13 <> count($parts)) {
+        if (13 != count($parts)) {
             throw new RavenException('Invalid number of parts');
         }
 
         list($ver, $status, $msg, $issue, $id, $url, $principal, $auth, $sso, $life, $params, $kid, $sig) = $parts;
 
-        $token = new RavenUserToken($principal);
+        $token = new self($principal);
 
         $token->setAttributes(
             array(

@@ -15,7 +15,7 @@ use Symfony\Component\Config\Loader\LoaderInterface;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpKernel\Kernel;
 
-require_once __DIR__ . '/../../../vendor/autoload.php';
+require_once __DIR__.'/../../../vendor/autoload.php';
 
 /**
  * App Test Kernel for functional tests.
@@ -29,14 +29,14 @@ class AppKernel extends Kernel
 
     public function __construct($testCase, $rootConfig, $environment, $debug)
     {
-        if (!is_dir(__DIR__ . '/' . $testCase)) {
+        if (!is_dir(__DIR__.'/'.$testCase)) {
             throw new \InvalidArgumentException(sprintf('The test case "%s" does not exist.', $testCase));
         }
         $this->testCase = $testCase;
 
         $fs = new Filesystem();
         if (!$fs->isAbsolutePath($rootConfig) && !file_exists(
-            $rootConfig = __DIR__ . '/' . $testCase . '/' . $rootConfig
+            $rootConfig = __DIR__.'/'.$testCase.'/'.$rootConfig
         )
         ) {
             throw new \InvalidArgumentException(sprintf('The root config "%s" does not exist.', $rootConfig));
@@ -48,7 +48,7 @@ class AppKernel extends Kernel
 
     public function registerBundles()
     {
-        if (!file_exists($filename = $this->getRootDir() . '/' . $this->testCase . '/bundles.php')) {
+        if (!file_exists($filename = $this->getRootDir().'/'.$this->testCase.'/bundles.php')) {
             throw new \RuntimeException(sprintf('The bundles file "%s" does not exist.', $filename));
         }
 
@@ -62,12 +62,12 @@ class AppKernel extends Kernel
 
     public function getCacheDir()
     {
-        return sys_get_temp_dir() . '/' . Kernel::VERSION . '/' . $this->testCase . '/cache/' . $this->environment;
+        return sys_get_temp_dir().'/'.Kernel::VERSION.'/'.$this->testCase.'/cache/'.$this->environment;
     }
 
     public function getLogDir()
     {
-        return sys_get_temp_dir() . '/' . Kernel::VERSION . '/' . $this->testCase . '/logs';
+        return sys_get_temp_dir().'/'.Kernel::VERSION.'/'.$this->testCase.'/logs';
     }
 
     public function registerContainerConfiguration(LoaderInterface $loader)

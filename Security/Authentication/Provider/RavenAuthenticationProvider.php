@@ -60,8 +60,7 @@ class RavenAuthenticationProvider implements AuthenticationProviderInterface
         UserProviderInterface $userProvider,
         RavenServiceInterface $raven,
         LoggerInterface $logger = null
-    )
-    {
+    ) {
         $this->userProvider = $userProvider;
         $this->raven = $raven;
         $this->logger = $logger;

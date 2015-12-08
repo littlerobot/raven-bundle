@@ -162,6 +162,6 @@ Y6iyl0/GyBRzAXYemQJAVeChw15Lj2/uE7HIDtkqd8POzXjumOxKPfESSHKxRGnP
                 break;
         }
 
-        return $url . (false !== strpos($url, '?') ? '&' : '?') . 'WLS-Response=' . urlencode(implode('!', $response));
+        return $url.(false !== strpos($url, '?') ? '&' : '?').'WLS-Response='.urlencode(implode('!', $response));
     }
 }
